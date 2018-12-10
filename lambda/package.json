@@ -1,0 +1,24 @@
+{
+  "name": "alexa_ctf_time_skill",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzraelSec/alexa_ctf_time_skill.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AzraelSec/alexa_ctf_time_skill/issues"
+  },
+  "homepage": "https://github.com/AzraelSec/alexa_ctf_time_skill#readme",
+  "dependencies": {
+    "ask-sdk": "^2.3.0",
+    "request": "^2.88.0",
+    "ssml-builder": "^0.4.3"
+  }
+}

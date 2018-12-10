@@ -1,0 +1,37 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "ctf time",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetTopTeams",
+                    "slots": [],
+                    "samples": [
+                        "chi sono i primi in classifica",
+                        "quali team sono in testa alla classifica",
+                        "qual è la classifica",
+                        "chi sono i migliori",
+                        "quali sono i migliori team"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
