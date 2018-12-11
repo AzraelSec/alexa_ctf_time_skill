@@ -18,6 +18,8 @@
   "homepage": "https://github.com/AzraelSec/alexa_ctf_time_skill#readme",
   "dependencies": {
     "ask-sdk": "^2.3.0",
+    "i18next": "^12.1.0",
+    "i18next-sprintf-postprocessor": "^0.2.2",
     "request": "^2.88.0",
     "ssml-builder": "^0.4.3"
   }

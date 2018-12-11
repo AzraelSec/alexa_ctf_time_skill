@@ -15,8 +15,12 @@ const FALLBACK_REPROMPT = 'In cosa posso aiutarti?';
 const STOP_MESSAGE = 'Ciao!';
 
 const INFORMATIONS = {
-    TOP_TEAM: {
+    TOP_TEAMS: {
         START_MESSAGE: 'I migliori dieci team quest\'anno sono i seguenti:',
+        TEAM_NAME_SCORE: '{1} con {2} punti'
+    },
+    TOP_TEAM: {
+        START_MESSAGE: 'Il miglior team quest\'anno è ',
         TEAM_NAME_SCORE: '{1} con {2} punti'
     }
 };
@@ -29,13 +33,47 @@ const GetTopTeamsHandler = {
     //Shorthand method declaration
     canHandle(handlerInput) {
         let request = handlerInput.requestEnvelope.request;
-        return request.type === 'LaunchRequest' || (request.type === 'IntentRequest'
-        && request.intent.name === 'GetTopTeams');
+        return request.type === 'LaunchRequest' || (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeams');
     },
     handle(handlerInput) {
         return getTopTeams()
             .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
-            .catch(() => handlerInput.responseBuilder.speak('Sorry, an error occurred.').reprompt('Sorry, an error occurred.').getResponse())
+            .catch(() => handlerInput.responseBuilder.speak(ERROR_MESSAGE).reprompt(ERROR_MESSAGE).getResponse())
+    }
+}
+function getTopTeams() {
+    return new Promise((resolve, reject) => {
+        const year = new Date().getFullYear();
+        const options = {
+            url: `https://ctftime.org/api/v1/top/${encodeURIComponent(year)}/`,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Accept-Charset': 'utf-8',
+                'User-Agent': 'Alexa\'s CTF Time Skill'
+            }
+        }
+        request(options, (err, res, body) => {
+            if(err) reject();
+            else {
+                var speech = new Speech();
+                speech.sentence(INFORMATIONS.TOP_TEAMS.START_MESSAGE);
+                var json_body = JSON.parse(body);
+                for(var i = 0; i < json_body[year].length; i++)
+                    speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${mapTeamNameScore(INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, json_body[year][i].team_name, json_body[year][i].points)}`);
+                resolve(speech.ssml(true));
+            }
+        })
+    });
+}
+
+const GetTopTeamHandler = {
+    canHandle(handlerInput) {
+        let request = handlerInput.requestEnvelope.request;
+        return request.type === 'LaunchRequest'|| (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam');
+    },
+    handle(handlerInput) {
+        return getTopTeams
     }
 }
 function getTopTeams() {
@@ -56,12 +94,14 @@ function getTopTeams() {
                 var speech = new Speech();
                 speech.sentence(INFORMATIONS.TOP_TEAM.START_MESSAGE);
                 var json_body = JSON.parse(body);
-                for(var i = 0; i < json_body[year].length; i++)
-                    speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE.replace('{1}', json_body[year][i].team_name).replace('{2}', parseInt(json_body[year][i].points))}`);
+                speech.sentence(`${mapTeamNameScore(INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, json_body[year][0].team_name, json_body[year][0].points)}`);
                 resolve(speech.ssml(true));
             }
         })
     });
+}
+function mapTeamNameScore(str, name, score) {
+    return `${str.replace('{1}', name).replace('{2}', score)}`
 }
 
 const HelpHandler = {
