@@ -38,7 +38,7 @@ const GetTopTeamsHandler = {
     handle(handlerInput) {
         return getTopTeams()
             .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
-            .catch(() => handlerInput.responseBuilder.speak(ERROR_MESSAGE).reprompt(ERROR_MESSAGE).getResponse())
+            .catch(() => handlerInput.responseBuilder.speak(ERROR_MESSAGE).reprompt(ERROR_MESSAGE).getResponse());
     }
 }
 function getTopTeams() {
@@ -73,10 +73,12 @@ const GetTopTeamHandler = {
         return request.type === 'LaunchRequest'|| (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam');
     },
     handle(handlerInput) {
-        return getTopTeams
+        return getTopTeam()
+        .then((value) => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
+        .catch(() => handlerInput.responseBuilder.speak(ERROR_MESSAGE).reprompt(ERROR_MESSAGE).getResponse());
     }
 }
-function getTopTeams() {
+function getTopTeam() {
     return new Promise((resolve, reject) => {
         const year = new Date().getFullYear();
         const options = {
@@ -159,7 +161,7 @@ const FallbackHandler = {
   };
   
   const ErrorHandler = {
-    canHandle() {
+    canHandle(handlerInput) {
       return true;
     },
     handle(handlerInput, error) {
@@ -176,6 +178,7 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder.addRequestHandlers(
     GetTopTeamsHandler,
+    GetTopTeamHandler,
     SessionEndedRequestHandler,
     ExitHandler,
     FallbackHandler,
