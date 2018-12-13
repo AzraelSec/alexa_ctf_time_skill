@@ -31,4 +31,4 @@ module.exports = {
             TEAM_NAME_SCORE: '{1} con {2} punti'
         }
     }
-}
+};

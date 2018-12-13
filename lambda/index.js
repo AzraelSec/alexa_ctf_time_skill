@@ -16,12 +16,15 @@ const GetTopTeamsHandler = {
     handle(handlerInput) {
         return getTopTeams()
             .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
-            .catch(() => handlerInput.responseBuilder.speak(message.ERROR_MESSAGE).reprompt(message.ERROR_MESSAGE).getResponse());
+            .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
     }
 }
 function getTopTeams() {
     return new Promise((resolve, reject) => {
         const year = new Date().getFullYear();
+        console.log('si');
+        const endpoint = endpoints.topEndPoint(year)
+        console.log(endpoint);
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
         request(options, (err, res, body) => {
             if(err) reject();
@@ -76,8 +79,8 @@ const HelpHandler = {
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
-      .speak(HELP_MESSAGE)
-      .reprompt(HELP_REPROMPT)
+      .speak(messages.HELP_MESSAGE)
+      .reprompt(messages.HELP_REPROMPT)
       .getResponse();
   }
 };
@@ -90,8 +93,8 @@ const FallbackHandler = {
     },
     handle(handlerInput) {
       return handlerInput.responseBuilder
-        .speak(FALLBACK_MESSAGE)
-        .reprompt(FALLBACK_REPROMPT)
+        .speak(messages.FALLBACK_MESSAGE)
+        .reprompt(messages.FALLBACK_REPROMPT)
         .getResponse();
     }
   };
@@ -105,7 +108,7 @@ const ExitHandler = {
     },
     handle(handlerInput) {
       return handlerInput.responseBuilder
-        .speak(STOP_MESSAGE)
+        .speak(messages.STOP_MESSAGE)
         .getResponse();
     }
 };
@@ -122,16 +125,16 @@ const SessionEndedRequestHandler = {
 };
 
 const ErrorHandler = {
-canHandle(handlerInput) {
-    return true;
-},
-handle(handlerInput, error) {
-    console.log(`Error handled: ${error.message}`);
-    return handlerInput.responseBuilder
-        .speak(messages.ERROR_REQUEST_MESSAGE)
-        .reprompt(messages.ERROR_REQUEST_MESSAGE)
-        .getResponse();
-}
+    canHandle() {
+        return true;
+    },
+    handle(handlerInput, error) {
+        console.log(`Error handled: ${error.message}`);
+        return handlerInput.responseBuilder
+            .speak(messages.ERROR_REQUEST_MESSAGE)
+            .reprompt(messages.ERROR_REQUEST_MESSAGE)
+            .getResponse();
+    }
 };
 
 function getCTFTimeRequestOptions(endpoint) {
