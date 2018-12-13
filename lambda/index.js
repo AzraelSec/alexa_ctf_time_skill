@@ -12,19 +12,23 @@ const GetTopTeamsHandler = {
         return request.type === 'LaunchRequest' || (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeams');
     },
     handle(handlerInput) {
-        return getTopTeams()
-            .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
-            .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
+        /*let slots = handlerInput.requestEnvelope.request.intent.slots;
+        let year = slots.year.value ? slots.year.value : null;
+        let number =  slots.number.value ? slots.number.value : null*/
+        console.log('1');
+        return getTopTeams(2018, 5)
+        .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
+        .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
     }
 }
 function getTopTeams(year, teamsNumber) {
     return new Promise((resolve, reject) => {
-        let targetYear = year || new Date().getFullYear;
         let limit = teamsNumber || 10;
-        requestTopTeamsSet(targetYear)
-        .then(teams => {
+        requestTopTeamsSet(year)
+        .then((teams) => {
             let speech = new Speech();
             teams = teams.slice(0, limit);
+            console.log('Teams' + teams);
             speech.sentence(messages.INFORMATIONS.TOP_TEAMS.START_MESSAGE);;
             for(var i = 0; i < teams.length; i++)
                 speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, teams[i].team_name, teams[i].points)}`);
@@ -40,16 +44,16 @@ const GetTopTeamHandler = {
         return request.type === 'LaunchRequest'|| (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam');
     },
     handle(handlerInput) {
-        return getTopTeam()
-        .then(value => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
+        //let year = handlerInput.requestEnvelope.request.intent.slots.year.value ? handlerInput.requestEnvelope.request.intent.slots.year.value : null;
+        return getTopTeam(2018)
+        .then((value) => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
         .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
     }
 }
 function getTopTeam(year) {
     return new Promise((resolve, reject) => {
-        let targetYear = year || new Date().getFullYear;
-        requestTopTeamsSet(targetYear)
-        .then(teams => {
+        requestTopTeamsSet(year)
+        .then((teams) => {
             let speech = new Speech();
             speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE);
             speech.sentence(`${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, teams[0].team_name, teams[0].points)}`);
@@ -60,11 +64,12 @@ function getTopTeam(year) {
 }
 function requestTopTeamsSet(year) {
     return new Promise((resolve, reject) => {
-        const targetYear = year || new Date().getFullYear();
+        const targetYear = year || (new Date().getFullYear());
+        console.log('2');
         //2011: First year documented on CTF Time
-        if(targetYear > new Date().getFullYear || targetYear < 2011) reject();
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(targetYear));
         request(options, (err, res, body) => {
+            console.log('Fetched data:' + body);
             if(err) reject();
             else resolve(JSON.parse(body).targetYear);
         })
