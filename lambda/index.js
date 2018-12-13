@@ -17,21 +17,20 @@ const GetTopTeamsHandler = {
             .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
     }
 }
-function getTopTeams() {
+function getTopTeams(year, teamsNumber) {
     return new Promise((resolve, reject) => {
-        const year = new Date().getFullYear();
-        const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
-        request(options, (err, res, body) => {
-            if(err) reject();
-            else {
-                var speech = new Speech();
-                speech.sentence(messages.INFORMATIONS.TOP_TEAMS.START_MESSAGE);
-                var json_body = JSON.parse(body);
-                for(var i = 0; i < json_body[year].length; i++)
-                    speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, json_body[year][i].team_name, json_body[year][i].points)}`);
-                resolve(speech.ssml(true));
-            }
+        let targetYear = year || new Date().getFullYear;
+        let limit = teamsNumber || 10;
+        requestTopTeamsSet(targetYear)
+        .then(teams => {
+            let speech = new Speech();
+            teams = teams.slice(0, limit);
+            speech.sentence(messages.INFORMATIONS.TOP_TEAMS.START_MESSAGE);;
+            for(var i = 0; i < teams.length; i++)
+                speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, teams[i].team_name, teams[i].points)}`);
+            resolve(speech.ssml(true));
         })
+        .catch(() => reject());
     });
 }
 
@@ -42,27 +41,37 @@ const GetTopTeamHandler = {
     },
     handle(handlerInput) {
         return getTopTeam()
-        .then((value) => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
+        .then(value => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
         .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
     }
 }
-function getTopTeam() {
+function getTopTeam(year) {
     return new Promise((resolve, reject) => {
-        const year = new Date().getFullYear();
-        const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
+        let targetYear = year || new Date().getFullYear;
+        requestTopTeamsSet(targetYear)
+        .then(teams => {
+            let speech = new Speech();
+            speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE);
+            speech.sentence(`${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, teams[0].team_name, teams[0].points)}`);
+            resolve(speech.ssml(true));
+        })
+        .catch(() => reject());
+    });
+}
+function requestTopTeamsSet(year) {
+    return new Promise((resolve, reject) => {
+        const targetYear = year || new Date().getFullYear();
+        //2011: First year documented on CTF Time
+        if(targetYear > new Date().getFullYear || targetYear < 2011) reject();
+        const options = getCTFTimeRequestOptions(endpoints.topEndPoint(targetYear));
         request(options, (err, res, body) => {
             if(err) reject();
-            else {
-                var speech = new Speech();
-                speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE);
-                var json_body = JSON.parse(body);
-                speech.sentence(`${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, json_body[year][0].team_name, json_body[year][0].points)}`);
-                resolve(speech.ssml(true));
-            }
+            else resolve(JSON.parse(body).targetYear);
         })
     });
 }
 function mapTeamNameScore(str, name, score) {
+    //parseInt to make it more readable removing floating point stuff
     return `${str.replace('{1}', name).replace('{2}', parseInt(score))}`
 }
 
