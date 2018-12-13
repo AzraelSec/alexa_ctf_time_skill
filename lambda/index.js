@@ -5,8 +5,6 @@ const Speech = require('ssml-builder');
 const messages = require('./assets/strings');
 const endpoints = require('./assets/endpoints');
 
-
-
 const GetTopTeamsHandler = {
     //Shorthand method declaration
     canHandle(handlerInput) {
@@ -22,9 +20,6 @@ const GetTopTeamsHandler = {
 function getTopTeams() {
     return new Promise((resolve, reject) => {
         const year = new Date().getFullYear();
-        console.log('si');
-        const endpoint = endpoints.topEndPoint(year)
-        console.log(endpoint);
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
         request(options, (err, res, body) => {
             if(err) reject();
@@ -68,7 +63,7 @@ function getTopTeam() {
     });
 }
 function mapTeamNameScore(str, name, score) {
-    return `${str.replace('{1}', name).replace('{2}', score)}`
+    return `${str.replace('{1}', name).replace('{2}', parseInt(score))}`
 }
 
 const HelpHandler = {
