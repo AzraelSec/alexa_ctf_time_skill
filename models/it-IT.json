@@ -23,11 +23,21 @@
                     "name": "GetTopTeams",
                     "slots": [],
                     "samples": [
-                        "chi sono i primi in classifica",
+                        "chi sono i primi team in classifica",
                         "quali team sono in testa alla classifica",
                         "qual è la classifica",
                         "chi sono i migliori",
                         "quali sono i migliori team"
+                    ]
+                },
+                {
+                    "name": "GetTopTeam",
+                    "slots": [],
+                    "samples": [
+                        "qual è il miglior team",
+                        "chi è il migliore",
+                        "quale team è in testa alla classifica",
+                        "chi è il primo team in classifica"
                     ]
                 }
             ],
