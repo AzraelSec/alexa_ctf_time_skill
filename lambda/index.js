@@ -5,8 +5,6 @@ const Speech = require('ssml-builder');
 const messages = require('./assets/strings');
 const endpoints = require('./assets/endpoints');
 
-
-
 const GetTopTeamsHandler = {
     //Shorthand method declaration
     canHandle(handlerInput) {
@@ -65,7 +63,7 @@ function getTopTeam() {
     });
 }
 function mapTeamNameScore(str, name, score) {
-    return `${str.replace('{1}', name).replace('{2}', score)}`
+    return `${str.replace('{1}', name).replace('{2}', parseInt(score))}`
 }
 
 const HelpHandler = {
