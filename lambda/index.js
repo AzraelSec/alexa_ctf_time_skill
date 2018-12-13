@@ -12,13 +12,14 @@ const GetTopTeamsHandler = {
         return request.type === 'LaunchRequest' || (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeams');
     },
     handle(handlerInput) {
-        /*let slots = handlerInput.requestEnvelope.request.intent.slots;
+        let slots = handlerInput.requestEnvelope.request.intent.slots;
         let year = slots.year.value ? slots.year.value : null;
-        let number =  slots.number.value ? slots.number.value : null*/
-        console.log('1');
-        return getTopTeams(2018, 5)
-        .then((values) => handlerInput.responseBuilder.speak(values).reprompt(values).getResponse())
-        .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
+        let number =  slots.number.value ? slots.number.value : null
+        return new Promise((resolve) => {
+            getTopTeams(year, number)
+            .then((values) => resolve(handlerInput.responseBuilder.speak(values).reprompt(values).getResponse()))
+            .catch((e) => resolve(handlerInput.responseBuilder.speak(e.message).reprompt(e.message).getResponse()))
+        });
     }
 }
 function getTopTeams(year, teamsNumber) {
@@ -26,15 +27,16 @@ function getTopTeams(year, teamsNumber) {
         let limit = teamsNumber || 10;
         requestTopTeamsSet(year)
         .then((teams) => {
+            console.log("Teams received: " + JSON.stringify(teams));
             let speech = new Speech();
             teams = teams.slice(0, limit);
             console.log('Teams' + teams);
-            speech.sentence(messages.INFORMATIONS.TOP_TEAMS.START_MESSAGE);;
+            speech.sentence(messages.INFORMATIONS.TOP_TEAMS.START_MESSAGE.replace('{1}', teams.length).replace('{2}', year));;
             for(var i = 0; i < teams.length; i++)
-                speech.sentence(`${(i === json_body[year].length - 1) ? ' e ' : ''}${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, teams[i].team_name, teams[i].points)}`);
+                speech.sentence(`${(i === teams.length - 1) ? ' e ' : ''}${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE, teams[i].team_name, teams[i].points)}`);
             resolve(speech.ssml(true));
         })
-        .catch(() => reject());
+        .catch((e) => reject(e));
     });
 }
 
@@ -44,34 +46,35 @@ const GetTopTeamHandler = {
         return request.type === 'LaunchRequest'|| (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam');
     },
     handle(handlerInput) {
-        //let year = handlerInput.requestEnvelope.request.intent.slots.year.value ? handlerInput.requestEnvelope.request.intent.slots.year.value : null;
-        return getTopTeam(2018)
+        let year = handlerInput.requestEnvelope.request.intent.slots.year.value ? handlerInput.requestEnvelope.request.intent.slots.year.value : null;
+        return getTopTeam(year)
         .then((value) => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
-        .catch(() => handlerInput.responseBuilder.speak(messages.ERROR_MESSAGE).reprompt(messages.ERROR_MESSAGE).getResponse());
+        .catch(() => handlerInput.responseBuilder.speak(e.message).reprompt(e.message).getResponse());
     }
 }
 function getTopTeam(year) {
     return new Promise((resolve, reject) => {
         requestTopTeamsSet(year)
         .then((teams) => {
+            console.log("Teams received: " + JSON.stringify(teams));
             let speech = new Speech();
-            speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE);
+            speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE.replace('{1}', year));
             speech.sentence(`${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, teams[0].team_name, teams[0].points)}`);
             resolve(speech.ssml(true));
         })
-        .catch(() => reject());
+        .catch((e) => reject(e));
     });
 }
 function requestTopTeamsSet(year) {
     return new Promise((resolve, reject) => {
         const targetYear = year || (new Date().getFullYear());
-        console.log('2');
         //2011: First year documented on CTF Time
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(targetYear));
         request(options, (err, res, body) => {
-            console.log('Fetched data:' + body);
-            if(err) reject();
-            else resolve(JSON.parse(body).targetYear);
+            console.log('Fetched data:' + JSON.stringify(body));
+            console.log('Year Requested: ' + targetYear);
+            if(err) reject(err);
+            else resolve(body[targetYear]);
         })
     });
 }
@@ -154,7 +157,8 @@ function getCTFTimeRequestOptions(endpoint) {
             'Accept': 'application/json',
             'Accept-Charset': 'utf-8',
             'User-Agent': 'Alexa\'s CTF Time Skill'
-        }
+        },
+        json: true
     }
 };
 

@@ -23,11 +23,11 @@ module.exports = {
 
     INFORMATIONS : {
         TOP_TEAMS: {
-            START_MESSAGE: 'I migliori dieci team quest\'anno sono i seguenti:',
+            START_MESSAGE: 'I migliori {1} team del {2} sono i seguenti:',
             TEAM_NAME_SCORE: '{1} con {2} punti'
         },
         TOP_TEAM: {
-            START_MESSAGE: 'Il miglior team quest\'anno è ',
+            START_MESSAGE: 'Il miglior team del {1} è ',
             TEAM_NAME_SCORE: '{1} con {2} punti'
         }
     }
