@@ -22,9 +22,6 @@ const GetTopTeamsHandler = {
 function getTopTeams() {
     return new Promise((resolve, reject) => {
         const year = new Date().getFullYear();
-        console.log('si');
-        const endpoint = endpoints.topEndPoint(year)
-        console.log(endpoint);
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
         request(options, (err, res, body) => {
             if(err) reject();
