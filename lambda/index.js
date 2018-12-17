@@ -21,7 +21,7 @@ const GetTopTeamsHandler = {
             .catch((e) => resolve(handlerInput.responseBuilder.speak(e.message).reprompt(e.message).getResponse()))
         });
     }
-}
+};
 function getTopTeams(year, teamsNumber) {
     return new Promise((resolve, reject) => {
         let limit = teamsNumber || 10;
@@ -51,7 +51,7 @@ const GetTopTeamHandler = {
         .then((value) => handlerInput.responseBuilder.speak(value).reprompt(value).getResponse())
         .catch(() => handlerInput.responseBuilder.speak(e.message).reprompt(e.message).getResponse());
     }
-}
+};
 function getTopTeam(year) {
     return new Promise((resolve, reject) => {
         requestTopTeamsSet(year)
@@ -69,12 +69,11 @@ function requestTopTeamsSet(year) {
     return new Promise((resolve, reject) => {
         let targetYear = year || (new Date().getFullYear());
         //to fix misunderstanding errors
-        if(targetYear === '?') targetYear = new Date().getFullYear();
+        if(targetYear === '?') targetYear = (new Date().getFullYear());
         //2011: First year documented on CTF Time
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(targetYear));
         request(options, (err, res, body) => {
             console.log('Fetched data:' + JSON.stringify(body));
-            console.log('Year Requested: ' + targetYear);
             if(err) reject(err);
             else resolve(body[targetYear]);
         })
@@ -83,6 +82,33 @@ function requestTopTeamsSet(year) {
 function mapTeamNameScore(str, name, score) {
     //parseInt to make it more readable removing floating point stuff
     return `${str.replace('{1}', name).replace('{2}', parseInt(score))}`
+}
+
+const GetNextEvents = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'LaunchRequest' || ( request.type === 'IntentRequest' && request.intent.name === 'GetNextEvents');
+    },
+    handle(handlerInput) {
+        
+    }
+};
+function requestNextEventsSet(startDate, endDate, number) {
+    return new Promise((resolve, reject) => {
+        //UNIX timestamp adjusting...
+        let targetStartDate = startDate || (new Date().getTime() / 1000);
+        if(targetStartDate === '?') targetStartDate = (new Date().getTime() / 1000);
+        let options = getCTFTimeRequestOptions(endpoints.eventsEndPoint());
+        //GET request query sting's parameters
+        options.qs = {};
+        if(targetStartDate) options['start'] = targetStartDate;
+        if(number) options['limit'] = number || 5;
+        request(options, (err, res, body) => {
+            console.log('Fetched data:' + JSON.stringify(body));
+            if(err) reject(err);
+            else resolve(body);
+        });
+    });
 }
 
 const HelpHandler = {

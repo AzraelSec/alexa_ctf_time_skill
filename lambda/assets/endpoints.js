@@ -5,5 +5,10 @@ module.exports = {
         let endpoint = `${BASE_URI}/top${year ? '/'+ year +'/' : '/'}`;
         console.log(`Request to API: ${endpoint}`);
         return endpoint;
+    },
+    eventsEndPoint: function () {
+        let endpoint = `${BASE_URI}/events/`
+        console.log(`Request to API: ${endpoint}`);
+        return endpoint;
     }
 }
