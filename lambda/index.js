@@ -67,7 +67,9 @@ function getTopTeam(year) {
 }
 function requestTopTeamsSet(year) {
     return new Promise((resolve, reject) => {
-        const targetYear = year || (new Date().getFullYear());
+        let targetYear = year || (new Date().getFullYear());
+        //to fix misunderstanding errors
+        if(targetYear === '?') targetYear = new Date().getFullYear();
         //2011: First year documented on CTF Time
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(targetYear));
         request(options, (err, res, body) => {
