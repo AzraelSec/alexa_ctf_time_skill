@@ -20,7 +20,7 @@ const GetTopTeamsHandler = {
             .then((values) => resolve(handlerInput.responseBuilder.speak(values).reprompt(values).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(messages.INFORMATIONS.ERROR_MESSAGE).reprompt(messages.INFORMATIONS.ERROR_MESSAGE).getResponse())
+                resolve(handlerInput.responseBuilder.speak(messages.INFORMATIONS.ERROR_MESSAGE).reprompt(messages.INFORMATIONS.ERROR_MESSAGE).getResponse());
             });
         });
     }
@@ -51,7 +51,10 @@ const GetTopTeamHandler = {
         return new Promise((resolve, reject) => {
             getTopTeam(year)
             .then((value) => resolve(handlerInput.responseBuilder.speak(value).reprompt(value).getResponse()))
-            .catch(() => reject(handlerInput.responseBuilder.speak(e.message).reprompt(e.message).getResponse()));
+            .catch((e) => {
+                console.log(`Error: ${e.message}`);
+                resolve(handlerInput.responseBuilder.speak(messages.INFORMATIONS.ERROR_MESSAGE).reprompt(messages.INFORMATIONS.ERROR_MESSAGE).getResponse());
+            });
         })
             
     }
@@ -60,7 +63,7 @@ function getTopTeam(year) {
     return new Promise((resolve, reject) => {
         requestTopTeamsSet(year)
         .then((teams) => {
-            console.log("Teams received: " + JSON.stringify(teams));
+            console.log(`Teams received: ${JSON.stringify(teams)}`);
             let speech = new Speech();
             speech.sentence(messages.INFORMATIONS.TOP_TEAM.START_MESSAGE.replace('{1}', year));
             speech.sentence(`${mapTeamNameScore(messages.INFORMATIONS.TOP_TEAM.TEAM_NAME_SCORE, teams[0].team_name, teams[0].points)}`);
@@ -71,8 +74,9 @@ function getTopTeam(year) {
 }
 function requestTopTeamsSet(year) {
     return new Promise((resolve, reject) => {
-        if(year === '?') year = (new Date().getFullYear());
         //2011: First year documented on CTF Time
+        let presentYear = (new Date().getFullYear());
+        if(year === '?' || year < 2011 || year > presentYear) year = presentYear;
         const options = getCTFTimeRequestOptions(endpoints.topEndPoint(year));
         request(options, (err, res, body) => {
             console.log(`Fetched data: ${JSON.stringify(body)}`);
