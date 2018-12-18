@@ -112,7 +112,7 @@ function getNextEvents(startDate, endDate, number) {
             for(let i = 0; i < events.length; i++)
             {
                 const event = events[i];
-                speech.sayWithSSML(`<s>${getEventString(event, (i === events.length - 1))}</s>`);
+                speech.sayWithSSML(`<s>${getEventString(event, (i === events.length - 1 && events.length !== 1))}</s>`);
             }
             resolve(speech.ssml(true));
         })
