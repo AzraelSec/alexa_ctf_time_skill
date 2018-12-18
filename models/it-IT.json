@@ -75,6 +75,21 @@
                         "chi è il migliore",
                         "chi è il migliore quest'anno"
                     ]
+                },
+                {
+                    "name": "GetNextEvents",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "mostrami i prossimi {number} eventi",
+                        "mostrami i prossimi eventi",
+                        "quali sono i prossimi {number} eventi",
+                        "quali sono i prossimi eventi"
+                    ]
                 }
             ],
             "types": []
