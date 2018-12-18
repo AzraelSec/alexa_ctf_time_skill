@@ -29,6 +29,10 @@ module.exports = {
         TOP_TEAM: {
             START_MESSAGE: 'Il miglior team del {1} è ',
             TEAM_NAME_SCORE: '{1} con {2} punti'
+        },
+        NEXT_EVENTS: {
+            START_MESSAGE: 'I prossimi {1} eventi sono i seguenti:',
+            EVENT_DESCRIPTION: '{1}, di tipo {2}, che inizia il {3} e dura {4} ore'
         }
     }
 };
