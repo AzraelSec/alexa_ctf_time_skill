@@ -101,7 +101,7 @@ const GetNextEvents = {
         //insert a startByDate slot to look for starting from a specific date
         const date = new Date();
         return new Promise((resolve) => {
-            getNextEvents(date, null, number)
+            getNextEvents(date, number)
             .then((events) => resolve(handlerInput.responseBuilder.speak(events).reprompt(events).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
@@ -112,7 +112,7 @@ const GetNextEvents = {
 };
 function getNextEvents(startDate, number) {
     return new Promise((resolve, reject) => {
-        requestNextEventsSet(startDate, endDate, number)
+        requestNextEventsSet(startDate, number)
         .then((events) => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
@@ -134,11 +134,7 @@ function getEventString(event, and) {
     const type = event.format;
     const eventStartDate = getDateString(event.start);
     const duration = getDurationString(event.duration);
-    return `${and ? ' e ' : ''}${messages.INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION
-        .replace('{1}', title)
-        .replace('{2}', type)
-        .replace('{3}', eventStartDate)
-        .replace('{4}', duration)}`;
+    return `${and ? ' e ' : ''}${messages.INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION.replace('{1}', title).replace('{2}', type).replace('{3}', eventStartDate).replace('{4}', duration)}`;
 }
 function getDateString(dateString) {
     const date = new Date(dateString);
@@ -159,7 +155,7 @@ function requestNextEventsSet(startDate, number) {
         let options = getCTFTimeRequestOptions(endpoints.eventsEndPoint());
         //GET request query sting's parameters
         options.qs = {};
-        if(targetStartDate) options.qs.start = startDateTime;
+        if(startDateTime) options.qs.start = startDateTime;
         if(number) options.qs.limit = number;
         request(options, (err, res, body) => {
             console.log(`Fetched data: ${JSON.stringify(body)}`);
