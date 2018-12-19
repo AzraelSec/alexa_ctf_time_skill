@@ -7,7 +7,7 @@
 
 
 <div align="center">
-    <img alt="Amazon Alexa Logo" src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/docs/ux/branding/mark2._TTH_.png">
+    <img alt="Amazon Alexa Logo" src="https://static1.squarespace.com/static/52f8da70e4b05d1230c52a1d/t/599adb5546c3c47a3868e056/1503320934223/amazon_alexa">
 </div>
 
 ## Description
