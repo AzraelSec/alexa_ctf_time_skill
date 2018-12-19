@@ -8,7 +8,7 @@ module.exports = {
         ERROR_MESSAGE: 'I can\'t help you right now, retry later',
         ERROR_REQUEST_MESSAGE : 'I\'m sorry, I can\'t manage your request right now. Try to rephrase your request!',
         STOP_MESSAGE : 'Bye!',
-    
+        CONJUNCTION: ' and ',
         INFORMATIONS : {
             TOP_TEAMS: {
                 START_MESSAGE: 'The best %s teams in %d are the following:',

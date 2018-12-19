@@ -49,7 +49,7 @@ function getEventString(attrs, event, and) {
     const type = event.format;
     const eventStartDate = getDateString(event.start);
     const duration = getDurationString(event.duration);
-    return `${and ? ' e ' : ''}${attrs.t('INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION', title, type, eventStartDate, duration)}`;
+    return `${and ? attrs.t('CONJUNCTION') : ''}${attrs.t('INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION', title, type, eventStartDate, duration)}`;
 }
 function getDateString(dateString) {
     const date = new Date(dateString);

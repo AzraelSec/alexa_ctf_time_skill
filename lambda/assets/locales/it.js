@@ -8,7 +8,7 @@ module.exports = {
         ERROR_MESSAGE: 'Al momento non riesco a cercare le informazioni, riprova più tardi',
         ERROR_REQUEST_MESSAGE : 'Mi dispiace, non riesco a gestire la tua richiesta. Prova a riformulare la domanda!',
         STOP_MESSAGE : 'Ciao, alla prossima!',
-    
+        CONJUNCTION: ' e ',
         INFORMATIONS : {
             TOP_TEAMS: {
                 START_MESSAGE: 'I migliori %s team del %d sono i seguenti:',

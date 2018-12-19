@@ -37,7 +37,7 @@ function getTopTeams(attrs, year, teamsNumber) {
             for(var i = 0; i < teams.length; i++)
             {
                 let and = i === teams.length - 1;
-                speech.sentence(`${and ? ' e ' : ''}${attrs.t('INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE', teams[i].team_name, parseInt(teams[i].points))}`);
+                speech.sentence(`${and ? attrs.t('CONJUNCTION') : ''}${attrs.t('INFORMATIONS.TOP_TEAMS.TEAM_NAME_SCORE', teams[i].team_name, parseInt(teams[i].points))}`);
             }
             resolve(speech.ssml(true));
         })
