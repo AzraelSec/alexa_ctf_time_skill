@@ -1,5 +1,4 @@
 'use stricts'
-const messages = require('./assets/strings');
 
 module.exports.LaunchHandler = {
     canHandle(handlerInput) {

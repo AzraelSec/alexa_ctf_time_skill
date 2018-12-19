@@ -1,6 +1,5 @@
 'use stricts'
 const helpers = require('./helpers');
-const messages = require('./assets/strings');
 const endpoints = require('./assets/endpoints');
 const request = require('request');
 const Speech = require('ssml-builder');
