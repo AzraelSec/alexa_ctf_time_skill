@@ -13,6 +13,7 @@
 
 module.exports = {
     SKILL_NAME: 'ctf time',
+    HELLO_MESSAGE: '<emphasis>CTF Time</emphasis> è pronto',
     HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su ctf time, quali siano i prossimi eventi, e altro',
     HELP_REPROMPT: 'In cosa posso aiutarti?',
     ERROR_MESSAGE: 'Al momento non riesco a cercare le informazioni, riprova più tardi',

@@ -9,7 +9,7 @@ module.exports.GetTopTeamsHandler = {
     //Shorthand method declaration
     canHandle(handlerInput) {
         let request = handlerInput.requestEnvelope.request;
-        return request.type === 'LaunchRequest' || (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeams');
+        return request.type === 'IntentRequest' && request.intent.name === 'GetTopTeams';
     },
     handle(handlerInput) {
         let slots = handlerInput.requestEnvelope.request.intent.slots;
@@ -44,7 +44,7 @@ function getTopTeams(year, teamsNumber) {
 module.exports.GetTopTeamHandler = {
     canHandle(handlerInput) {
         let request = handlerInput.requestEnvelope.request;
-        return request.type === 'LaunchRequest'|| (request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam');
+        return request.type === 'IntentRequest' && request.intent.name === 'GetTopTeam';
     },
     handle(handlerInput) {
         let slots = handlerInput.requestEnvelope.request.intent.slots;
