@@ -6,25 +6,27 @@ module.exports.LaunchHandler = {
         return request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
         return handlerInput.responseBuilder
-        .speak(messages.HELLO_MESSAGE)
-        .reprompt(messages.HELLO_MESSAGE)
+        .speak(attrs.t('HELLO_MESSAGE'))
+        .reprompt(attrs.t('HELLO_MESSAGE'))
         .getResponse();
     }
 };
 
 module.exports.HelpHandler = {
     canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return request.type === 'IntentRequest'
-      && request.intent.name === 'AMAZON.HelpIntent';
-  },
-  handle(handlerInput) {
-    return handlerInput.responseBuilder
-      .speak(messages.HELP_MESSAGE)
-      .reprompt(messages.HELP_REPROMPT)
-      .getResponse();
-  }
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'IntentRequest'
+            && request.intent.name === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
+        return handlerInput.responseBuilder
+            .speak(attrs.t('HELP_MESSAGE'))
+            .reprompt(attrs.t('HELP_REPROMPT'))
+            .getResponse();
+    }
 };
   
 module.exports.ExitHandler = {
@@ -35,9 +37,10 @@ module.exports.ExitHandler = {
             || request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-      return handlerInput.responseBuilder
-        .speak(messages.STOP_MESSAGE)
-        .getResponse();
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
+        return handlerInput.responseBuilder
+            .speak(attrs.t('STOP_MESSAGE'))
+            .getResponse();
     }
 };
   
@@ -57,10 +60,11 @@ module.exports.ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
         console.log(`Error handled: ${error.message}`);
         return handlerInput.responseBuilder
-            .speak(messages.ERROR_REQUEST_MESSAGE)
-            .reprompt(messages.ERROR_REQUEST_MESSAGE)
+            .speak(attrs.t('ERROR_REQUEST_MESSAGE'))
+            .reprompt(attrs.t('ERROR_REQUEST_MESSAGE'))
             .getResponse();
     }
 };

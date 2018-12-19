@@ -1,9 +1,9 @@
 'use stricts'
 const helpers = require('./helpers');
-const endpoints = require('./assets/endpoints');
 const request = require('request');
 const Speech = require('ssml-builder');
 
+const endpoints = require('./assets/endpoints');
 
 module.exports.GetNextEvents = {
     canHandle(handlerInput) {
