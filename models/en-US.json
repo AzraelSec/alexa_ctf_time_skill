@@ -1,0 +1,113 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "ctf time",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetTopTeams",
+                    "slots": [
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "in {year} who were the top {number}",
+                        "in {year} who were the best {number}",
+                        "in {year} what was the top {number} teams ranking",
+                        "which were the top {number} teams in {year}",
+                        "what were the top {number} teams in {year}",
+                        "which were the top {number} teams of {year}",
+                        "which are the top {number} teams of {year}",
+                        "which are the top {number} teams in {year}",
+                        "which are the top {number} teams",
+                        "what are the top {number} teams",
+                        "who are the top {number}",
+                        "what is the top {number} ranking",
+                        "which are the top {number} teams on the board",
+                        "which are the top {number} teams on the charts",
+                        "which are the first {number} teams on the board",
+                        "which are the first {number} teams on the charts",
+                        "in {year} what was the ranking",
+                        "in {year} which was the ranking",
+                        "in {year} who were the best",
+                        "which are the best teams of {year}",
+                        "which are the best teams in {year}",
+                        "which were the best teams of {year}",
+                        "which were the best teams in {year}",
+                        "who were the best in {year}",
+                        "what was the ranking in {year}",
+                        "which teams were on top of the charts in {year}",
+                        "who were the first ranked in {year}",
+                        "which are the first teams on the charts",
+                        "which are the first teams on the board",
+                        "which teams are on top of the charts",
+                        "which teams are on top of the board",
+                        "what is the ranking",
+                        "who are the best",
+                        "which are the best teams"
+                    ]
+                },
+                {
+                    "name": "GetTopTeam",
+                    "slots": [
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "in {year} who was the best",
+                        "which is the best team of {year}",
+                        "what is the best team of {year}",
+                        "which was the best of {year}",
+                        "which was the best in {year}",
+                        "which team was on top of the charts in {year}",
+                        "which team was on top of the board in {year}",
+                        "which were the first on the charts in {year}",
+                        "who is the first on the charts",
+                        "which team is on top of the charts",
+                        "who is the best",
+                        "who is the best of the year"
+                    ]
+                },
+                {
+                    "name": "GetNextEvents",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "show me the next {number} events",
+                        "show me the upcoming events",
+                        "which are the next {number} events",
+                        "which are the upcoming events"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
