@@ -1,5 +1,6 @@
 'use stricts'
 const Alexa = require('ask-sdk');
+const LocalizationInterceptor = require('./localizationInterceptor');
 
 const generics = require('./genericsHandlers');
 const rankings = require('./rankingsHandlers');
@@ -13,4 +14,4 @@ exports.handler = skillBuilder.addRequestHandlers(
     generics.SessionEndedRequestHandler,
     generics.ExitHandler,
     generics.HelpHandler,
-    generics.LaunchHandler).addErrorHandler(generics.ErrorHandler).lambda();
+    generics.LaunchHandler).addRequestInterceptors(LocalizationInterceptor).addErrorHandler(generics.ErrorHandler).lambda();

@@ -1,9 +1,9 @@
 'use stricts'
 const helpers = require('./helpers');
-const messages = require('./assets/strings');
-const endpoints = require('./assets/endpoints');
 const request = require('request');
 const Speech = require('ssml-builder');
+
+const endpoints = require('./assets/endpoints');
 
 module.exports.GetNextEvents = {
     canHandle(handlerInput) {
@@ -11,44 +11,45 @@ module.exports.GetNextEvents = {
         return request.type === 'IntentRequest' && request.intent.name === 'GetNextEvents';
     },
     handle(handlerInput) {
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
         const number = handlerInput.requestEnvelope.request.intent.slots.number.value || 5;
         //insert a startByDate slot to look for starting from a specific date
         const date = new Date();
         return new Promise((resolve) => {
-            getNextEvents(date, number)
+            getNextEvents(attrs, date, number)
             .then((events) => resolve(handlerInput.responseBuilder.speak(events).reprompt(events).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(messages.INFORMATIONS.ERROR_MESSAGE).reprompt(messages.INFORMATIONS.ERROR_MESSAGE).getResponse());
+                resolve(handlerInput.responseBuilder.speak(attrs.t('ERROR_MESSAGE')).reprompt('ERROR_MESSAGE').getResponse());
             });
         })
     }
 };
-function getNextEvents(startDate, number) {
+function getNextEvents(attrs, startDate, number) {
     return new Promise((resolve, reject) => {
         requestNextEventsSet(startDate, number)
         .then((events) => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
-            speech.sentence(messages.INFORMATIONS.NEXT_EVENTS.START_MESSAGE.replace('{1}', events.length));
+            speech.sentence(attrs.t('INFORMATIONS.NEXT_EVENTS.START_MESSAGE' , events.length));
             for(let i = 0; i < events.length; i++)
             {
                 const and = (i === events.length - 1 && events.length !== 1);
                 const event = events[i];
                 //to refactor in a better way
-                speech.sayWithSSML(`<s>${getEventString(event, and)}</s>`);
+                speech.sayWithSSML(`<s>${getEventString(attrs, event, and)}</s>`);
             }
             resolve(speech.ssml(true));
         })
         .catch((e) => reject(e));
     });
 }
-function getEventString(event, and) {
+function getEventString(attrs, event, and) {
     const title = event.title;
     const type = event.format;
     const eventStartDate = getDateString(event.start);
     const duration = getDurationString(event.duration);
-    return `${and ? ' e ' : ''}${messages.INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION.replace('{1}', title).replace('{2}', type).replace('{3}', eventStartDate).replace('{4}', duration)}`;
+    return `${and ? attrs.t('CONJUNCTION') : ''}${attrs.t('INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION', title, type, eventStartDate, duration)}`;
 }
 function getDateString(dateString) {
     const date = new Date(dateString);
