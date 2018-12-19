@@ -6,7 +6,7 @@
 [![](https://img.shields.io/github/license/AzraelSec/alexa_ctf_time_skill.svg?style=popout-square)](https://github.com/AzraelSec/alexa_ctf_time_skill)
 
 
-<div style="text-align:center">
+<div align="center">
     <img alt="Amazon Alexa Logo" src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/docs/ux/branding/mark2._TTH_.png">
 </div>
 
