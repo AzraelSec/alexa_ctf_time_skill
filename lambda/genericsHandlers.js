@@ -1,6 +1,19 @@
 'use stricts'
 const messages = require('./assets/strings');
 
+module.exports.LaunchHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+        .speak(messages.HELLO_MESSAGE)
+        .reprompt(messages.HELLO_MESSAGE)
+        .getResponse();
+    }
+};
+
 module.exports.HelpHandler = {
     canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;

@@ -8,7 +8,7 @@ const Speech = require('ssml-builder');
 module.exports.GetNextEvents = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
-        return request.type === 'LaunchRequest' || ( request.type === 'IntentRequest' && request.intent.name === 'GetNextEvents');
+        return request.type === 'IntentRequest' && request.intent.name === 'GetNextEvents';
     },
     handle(handlerInput) {
         const number = handlerInput.requestEnvelope.request.intent.slots.number.value || 5;
