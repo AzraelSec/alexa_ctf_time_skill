@@ -27,20 +27,6 @@ module.exports.HelpHandler = {
       .getResponse();
   }
 };
-
-module.exports.FallbackHandler = {
-    canHandle(handlerInput) {
-      const request = handlerInput.requestEnvelope.request;
-      return request.type === 'IntentRequest'
-        && request.intent.name === 'AMAZON.FallbackIntent';
-    },
-    handle(handlerInput) {
-      return handlerInput.responseBuilder
-        .speak(messages.FALLBACK_MESSAGE)
-        .reprompt(messages.FALLBACK_REPROMPT)
-        .getResponse();
-    }
-  };
   
 module.exports.ExitHandler = {
     canHandle(handlerInput) {
