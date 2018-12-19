@@ -12,6 +12,5 @@ exports.handler = skillBuilder.addRequestHandlers(
     events.GetNextEvents,
     generics.SessionEndedRequestHandler,
     generics.ExitHandler,
-    generics.FallbackHandler,
     generics.HelpHandler,
     generics.LaunchHandler).addErrorHandler(generics.ErrorHandler).lambda();
