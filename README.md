@@ -11,7 +11,7 @@
 </div>
 
 ## Description
-This skill implements a bridge between CTF Time's API and Amazon's Alexa assistant.
+This skill implements a bridge between [CTF Time](https://ctftime.org/)'s API and Amazon's Alexa assistant.
 
 ## Supported Commands
 This is only the first release, so there are only few commands:
