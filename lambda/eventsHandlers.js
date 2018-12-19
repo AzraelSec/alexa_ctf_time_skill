@@ -4,6 +4,8 @@ const endpoints = require('./assets/endpoints');
 const request = require('request');
 const Speech = require('ssml-builder');
 
+const attrs = handlerInput.attributesManager.getRequestAttributes();
+
 module.exports.GetNextEvents = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
@@ -18,7 +20,7 @@ module.exports.GetNextEvents = {
             .then((events) => resolve(handlerInput.responseBuilder.speak(events).reprompt(events).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(messages.INFORMATIONS.ERROR_MESSAGE).reprompt(messages.INFORMATIONS.ERROR_MESSAGE).getResponse());
+                resolve(handlerInput.responseBuilder.speak(attrs.t(ERROR_MESSAGE)).reprompt(ERROR_MESSAGE).getResponse());
             });
         })
     }
@@ -29,7 +31,7 @@ function getNextEvents(startDate, number) {
         .then((events) => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
-            speech.sentence(messages.INFORMATIONS.NEXT_EVENTS.START_MESSAGE.replace('{1}', events.length));
+            speech.sentence(attrs.t(INFORMATIONS.NEXT_EVENTS.START_MESSAGE , events.length));
             for(let i = 0; i < events.length; i++)
             {
                 const and = (i === events.length - 1 && events.length !== 1);
@@ -47,7 +49,7 @@ function getEventString(event, and) {
     const type = event.format;
     const eventStartDate = getDateString(event.start);
     const duration = getDurationString(event.duration);
-    return `${and ? ' e ' : ''}${messages.INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION.replace('{1}', title).replace('{2}', type).replace('{3}', eventStartDate).replace('{4}', duration)}`;
+    return `${and ? ' e ' : ''}${attrs.t(INFORMATIONS.NEXT_EVENTS.EVENT_DESCRIPTION , title, type, eventStartDate, duration)}`;
 }
 function getDateString(dateString) {
     const date = new Date(dateString);
