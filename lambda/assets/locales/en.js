@@ -1,17 +1,18 @@
+
 'use strict'
 module.exports = {
     translation: {
         SKILL_NAME: 'ctf time',
         HELLO_MESSAGE: '<emphasis>ctf time</emphasis> is ready',
-        HELP_MESSAGE: 'You can ask me whatever about ctf time\'s ranking, about the upcoming events, e more',
-        HELP_REPROMPT: 'How could I help you?',
-        ERROR_MESSAGE: 'I can\'t help you right now, retry later',
-        ERROR_REQUEST_MESSAGE : 'I\'m sorry, I can\'t manage your request right now. Try to rephrase your request!',
-        STOP_MESSAGE : 'Bye!',
+        HELP_MESSAGE: 'You can ask me information about ctf time\'s rankings, about the upcoming events, and more',
+        HELP_REPROMPT: 'What can I help you with?',
+        ERROR_MESSAGE: 'I cannot load information at the moment, retry later',
+        ERROR_REQUEST_MESSAGE : 'I am sorry, I am not sure I understood. Try to rephrase your question!',
+        STOP_MESSAGE : 'Bye, see you soon!',
         CONJUNCTION: ' and ',
         INFORMATIONS : {
             TOP_TEAMS: {
-                START_MESSAGE: 'The best %s teams in %d are the following:',
+                START_MESSAGE: 'The best %s teams of %d are the following:',
                 TEAM_NAME_SCORE: '%s with %d points'
             },
             TOP_TEAM: {

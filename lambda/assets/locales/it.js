@@ -6,7 +6,7 @@ module.exports = {
         HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su ctf time, quali siano i prossimi eventi, e altro',
         HELP_REPROMPT: 'In cosa posso aiutarti?',
         ERROR_MESSAGE: 'Al momento non riesco a cercare le informazioni, riprova più tardi',
-        ERROR_REQUEST_MESSAGE : 'Mi dispiace, non riesco a gestire la tua richiesta. Prova a riformulare la domanda!',
+        ERROR_REQUEST_MESSAGE : 'Mi dispiace, non sono sicuro di aver capito. Prova a riformulare la domanda!',
         STOP_MESSAGE : 'Ciao, alla prossima!',
         CONJUNCTION: ' e ',
         INFORMATIONS : {
