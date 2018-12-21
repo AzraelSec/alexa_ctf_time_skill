@@ -3,7 +3,6 @@
 [![Stars](https://img.shields.io/github/stars/AzraelSec/alexa_ctf_time_skill.svg?style=popout-square)](https://github.com/AzraelSec/alexa_ctf_time_skill)
 [![Forks](https://img.shields.io/github/forks/AzraelSec/alexa_ctf_time_skill.svg?style=popout-square)](https://github.com/AzraelSec/alexa_ctf_time_skill)
 [![Issues](https://img.shields.io/github/issues/AzraelSec/alexa_ctf_time_skill.svg?style=popout-square)](https://github.com/AzraelSec/alexa_ctf_time_skill)
-
 [![License](https://img.shields.io/github/license/AzraelSec/alexa_ctf_time_skill.svg?style=popout-square)](https://github.com/AzraelSec/alexa_ctf_time_skill)
 [![Dependencies](https://david-dm.org/AzraelSec/alexa_ctf_time_skill.svg)](https://github.com/AzraelSec/alexa_ctf_time_skill)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/azraelsec)
