@@ -16,7 +16,7 @@
 This skill implements a bridge between [CTF Time](https://ctftime.org/)'s API and Amazon's Alexa assistant.
 
 ## Supported Commands
-This is only the first release, so there are only few commands:
+This is only the first release, so there are only few commands **_(IT/EN supported)_**:
 
 - To request information about the **top 10** global ranking
   - *Alexa, launch CTF Time*
@@ -35,11 +35,11 @@ This is only the first release, so there are only few commands:
 # Dependencies
 These are the project dependencies:
 
-- [ask-sdk](https://www.npmjs.com/package/ask-sdk)
-- [i18next](https://www.npmjs.com/package/i18next)
-- [i18next-sprintf-postprocessor](https://www.npmjs.com/package/i18next-sprintf-postprocessor)
-- [request](https://www.npmjs.com/package/request)
-- [ssml-builder](https://www.npmjs.com/package/ssml-builder)
+- [ask-sdk](https://www.npmjs.com/package/ask-sdk) ^2.3.0
+- [i18next](https://www.npmjs.com/package/i18next) ^12.1.0
+- [i18next-sprintf-postprocessor](https://www.npmjs.com/package/i18next-sprintf-postprocessor) ^0.2.2
+- [request](https://www.npmjs.com/package/request) ^2.88.0
+- [ssml-builder](https://www.npmjs.com/package/ssml-builder) ^0.4.3
 
 # Donation
 If you like this skill or you like this project, you can give me a cup of coffee *:P*
