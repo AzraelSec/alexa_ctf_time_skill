@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
     translation: {
-        SKILL_NAME: 'ctf time',
+        SKILL_NAME: 'c.t.f. time',
         HELLO_MESSAGE: '<emphasis>ctf time</emphasis> è pronto',
         HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su ctf time, quali siano i prossimi eventi, e altro',
         HELP_REPROMPT: 'In cosa posso aiutarti?',

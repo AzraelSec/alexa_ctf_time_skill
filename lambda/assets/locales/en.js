@@ -2,9 +2,9 @@
 'use strict'
 module.exports = {
     translation: {
-        SKILL_NAME: 'ctf time',
+        SKILL_NAME: 'c.t.f. time',
         HELLO_MESSAGE: '<emphasis>ctf time</emphasis> is ready',
-        HELP_MESSAGE: 'You can ask me information about ctf time\'s rankings, about the upcoming events, and more',
+        HELP_MESSAGE: 'You can ask me information about c.t.f. time\'s rankings, about the upcoming events, and more',
         HELP_REPROMPT: 'What can I help you with?',
         ERROR_MESSAGE: 'I cannot load information at the moment, retry later',
         ERROR_REQUEST_MESSAGE : 'I am sorry, I am not sure I understood. Try to rephrase your question!',

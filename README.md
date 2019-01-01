@@ -13,24 +13,24 @@
 </div>
 
 ## About
-This skill implements a bridge between [CTF Time](https://ctftime.org/)'s API and Amazon's Alexa assistant.
+This skill implements a bridge between [C.T.F. Time](https://ctftime.org/)'s API and Amazon's Alexa assistant.
 
 ## Supported Commands
 This is only the first release, so there are only few commands **_(IT/EN supported)_**:
 
 - To request information about the **top 10** global ranking
-  - *Alexa, launch CTF Time*
+  - *Alexa, launch C.T.F. Time*
   - *Alexa, which teams are on top of the charts*
   - *Alexa, who were the first ranked in 2014*
   - *Alexa, which were the top three teams in 2016*
 - To ask for the **best team**
-  - *Alexa, open CTF Time*
+  - *Alexa, open C.T.F. Time*
   - *Alexa, who is the best*
   - *Alexa, in 2013 who was the best*
   - *Alexa, which was the best of 2015*
-- To look for **upcoming CTF events**
-  - *Alexa, ask CTF Time to show me the upcoming events*
-  - *Alexa, ask CTF Time which are the next seven events*
+- To look for **upcoming C.T.F. events**
+  - *Alexa, ask C.T.F. Time to show me the upcoming events*
+  - *Alexa, ask C.T.F. Time which are the next seven events*
 
 # Dependencies
 These are the project dependencies:
