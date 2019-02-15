@@ -18,10 +18,10 @@ module.exports.GetTopTeamsHandler = {
         let number =  slots.number.value || 10;
         return new Promise((resolve) => {
             getTopTeams(attrs, year, number)
-            .then((values) => resolve(handlerInput.responseBuilder.speak(values).reprompt(values).getResponse()))
+            .then((values) => resolve(handlerInput.responseBuilder.speak(values).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(attrs.t('INFORMATIONS.ERROR_MESSAGE')).reprompt(attrs.t('INFORMATIONS.ERROR_MESSAGE')).getResponse());
+                resolve(handlerInput.responseBuilder.speak(attrs.t('INFORMATIONS.ERROR_MESSAGE')).getResponse());
             });
         });
     }
@@ -56,10 +56,10 @@ module.exports.GetTopTeamHandler = {
         let year = (slots.year.value && slots.year.value !== '?' ? slots.year.value : null) || (new Date().getFullYear());
         return new Promise((resolve) => {
             getTopTeam(attrs, year)
-            .then((value) => resolve(handlerInput.responseBuilder.speak(value).reprompt(value).getResponse()))
+            .then((value) => resolve(handlerInput.responseBuilder.speak(value).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(attrs.t('INFORMATIONS.ERROR_MESSAGE')).reprompt(attrs.t('INFORMATIONS.ERROR_MESSAGE')).getResponse());
+                resolve(handlerInput.responseBuilder.speak(attrs.t('INFORMATIONS.ERROR_MESSAGE')).getResponse());
             });
         })
             

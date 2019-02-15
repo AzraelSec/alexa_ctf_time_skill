@@ -11,6 +11,7 @@ exports.handler = skillBuilder.addRequestHandlers(
     rankings.GetTopTeamsHandler,
     rankings.GetTopTeamHandler,
     events.GetNextEvents,
+    events.GetNextEvent,
     generics.SessionEndedRequestHandler,
     generics.ExitHandler,
     generics.HelpHandler,
