@@ -59,7 +59,7 @@ module.exports.GetNextEvents = {
 function getNextEvents(attrs, startDate, number) {
     return new Promise((resolve, reject) => {
         requestNextEventsSet(startDate, number)
-        .then(event => {
+        .then(events => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
             speech.sentence(attrs.t('INFORMATIONS.NEXT_EVENTS.START_MESSAGE' , events.length));

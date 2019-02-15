@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "c.t.f. time",
+            "invocationName": "sfide c. t. f.",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -95,6 +95,16 @@
                         "mostrami i prossimi eventi",
                         "quali sono i prossimi {number} eventi",
                         "quali sono i prossimi eventi"
+                    ]
+                },
+                {
+                    "name": "GetNextEvent",
+                    "slots": [],
+                    "samples": [
+                        "mostrami il prossimo evento",
+                        "cerca il prossimo evento",
+                        "qual è il prossimo evento",
+                        "quale sarà il prossimo evento"
                     ]
                 }
             ],

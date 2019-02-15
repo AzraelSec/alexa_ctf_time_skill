@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "c.t.f. time",
+            "invocationName": "c. t. f. time",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -105,6 +105,16 @@
                         "show me the upcoming events",
                         "which are the next {number} events",
                         "which are the upcoming events"
+                    ]
+                },
+                {
+                    "name": "GetNextEvent",
+                    "slots": [],
+                    "samples": [
+                        "show me the next event",
+                        "look for the next event",
+                        "which is the next event",
+                        "what is the next event"
                     ]
                 }
             ],
