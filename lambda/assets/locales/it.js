@@ -1,9 +1,9 @@
 'use strict'
 module.exports = {
     translation: {
-        SKILL_NAME: 'c.t.f. time',
-        HELLO_MESSAGE: '<emphasis>ctf time</emphasis> è pronto',
-        HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su ctf time, quali siano i prossimi eventi, e altro',
+        SKILL_NAME: 'sfide c. t. f.',
+        HELLO_MESSAGE: '<emphasis>sfide c. t. f.</emphasis> è pronto',
+        HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su sfide c. t. f. , quali siano i prossimi eventi, e altro',
         HELP_REPROMPT: 'In cosa posso aiutarti?',
         ERROR_MESSAGE: 'Al momento non riesco a cercare le informazioni, riprova più tardi',
         ERROR_REQUEST_MESSAGE : 'Mi dispiace, non sono sicuro di aver capito. Prova a riformulare la domanda!',
@@ -20,6 +20,10 @@ module.exports = {
             },
             NEXT_EVENTS: {
                 START_MESSAGE: 'I prossimi %d eventi sono i seguenti:',
+                EVENT_DESCRIPTION: '%s, di tipo %s, che inizia il %s e dura %d ore'
+            },
+            NEXT_EVENT: {
+                START_MESSAGE: 'Il prossimo evento è:',
                 EVENT_DESCRIPTION: '%s, di tipo %s, che inizia il %s e dura %d ore'
             }
         }

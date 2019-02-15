@@ -5,6 +5,37 @@ const Speech = require('ssml-builder');
 
 const endpoints = require('./assets/endpoints');
 
+module.exports.GetNextEvent = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'IntentRequest' && request.intent.name === 'GetNextEvent';
+    },
+    handle(handlerInput) {
+        const attrs = handlerInput.attributesManager.getRequestAttributes();
+        return new Promise((resolve) => {
+            getNextEvent(attrs)
+            .then((event) => resolve(handlerInput.responseBuilder.speak(event).getResponse()))
+            .catch((e) => {
+                console.log(`Error: ${e.message}`);
+                resolve(handlerInput.responseBuilder.speak(attrs.t('ERROR_MESSAGE')).getResponse());
+            })
+        });
+    }
+};
+function getNextEvent(attrs) {
+    return new Promise((resolve, reject) => {
+        requestNextEventsSet()
+        .then((events) => {
+            console.log(`Events received: ${JSON.stringify(events)}`);
+            let speech = new Speech();
+            speech.sentence(attrs.t('INFORMATIONS.NEXT_EVENT.START_MESSAGE'));
+            speech.sayWithSSML(`<s>${getEventString(attrs, event, false)}</s>`);
+            resolve(speech.ssml(true));
+        })
+        .catch((e) => reject(e));
+    });
+}
+
 module.exports.GetNextEvents = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
@@ -13,14 +44,14 @@ module.exports.GetNextEvents = {
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
         const number = handlerInput.requestEnvelope.request.intent.slots.number.value || 5;
-        //insert a startByDate slot to look for starting from a specific date
+        //insert a startByDate slot to look for events from a specific date
         const date = new Date();
         return new Promise((resolve) => {
             getNextEvents(attrs, date, number)
-            .then((events) => resolve(handlerInput.responseBuilder.speak(events).reprompt(events).getResponse()))
+            .then((events) => resolve(handlerInput.responseBuilder.speak(events).getResponse()))
             .catch((e) => {
                 console.log(`Error: ${e.message}`);
-                resolve(handlerInput.responseBuilder.speak(attrs.t('ERROR_MESSAGE')).reprompt('ERROR_MESSAGE').getResponse());
+                resolve(handlerInput.responseBuilder.speak(attrs.t('ERROR_MESSAGE')).getResponse());
             });
         })
     }
@@ -28,7 +59,7 @@ module.exports.GetNextEvents = {
 function getNextEvents(attrs, startDate, number) {
     return new Promise((resolve, reject) => {
         requestNextEventsSet(startDate, number)
-        .then((events) => {
+        .then(event => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
             speech.sentence(attrs.t('INFORMATIONS.NEXT_EVENTS.START_MESSAGE' , events.length));

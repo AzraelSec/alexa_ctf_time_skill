@@ -9,7 +9,6 @@ module.exports.LaunchHandler = {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
         return handlerInput.responseBuilder
         .speak(attrs.t('HELLO_MESSAGE'))
-        .reprompt(attrs.t('HELLO_MESSAGE'))
         .getResponse();
     }
 };
@@ -24,7 +23,6 @@ module.exports.HelpHandler = {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
         return handlerInput.responseBuilder
             .speak(attrs.t('HELP_MESSAGE'))
-            .reprompt(attrs.t('HELP_REPROMPT'))
             .getResponse();
     }
 };
@@ -64,7 +62,6 @@ module.exports.ErrorHandler = {
         console.log(`Error handled: ${error.message}`);
         return handlerInput.responseBuilder
             .speak(attrs.t('ERROR_REQUEST_MESSAGE'))
-            .reprompt(attrs.t('ERROR_REQUEST_MESSAGE'))
             .getResponse();
     }
 };
