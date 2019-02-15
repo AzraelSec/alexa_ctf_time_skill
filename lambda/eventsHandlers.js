@@ -24,12 +24,12 @@ module.exports.GetNextEvent = {
 };
 function getNextEvent(attrs) {
     return new Promise((resolve, reject) => {
-        requestNextEventsSet()
+        requestNextEventsSet(new Date())
         .then((events) => {
             console.log(`Events received: ${JSON.stringify(events)}`);
             let speech = new Speech();
             speech.sentence(attrs.t('INFORMATIONS.NEXT_EVENT.START_MESSAGE'));
-            speech.sayWithSSML(`<s>${getEventString(attrs, event, false)}</s>`);
+            speech.sayWithSSML(`<s>${getEventString(attrs, events[0], false)}</s>`);
             resolve(speech.ssml(true));
         })
         .catch((e) => reject(e));
