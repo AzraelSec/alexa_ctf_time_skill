@@ -7,6 +7,7 @@ module.exports.LaunchHandler = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("LaunchHandler started");
         return handlerInput.responseBuilder
         .speak(attrs.t('HELLO_MESSAGE'))
         .getResponse();
@@ -21,6 +22,7 @@ module.exports.HelpHandler = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("HelpHandler started");
         return handlerInput.responseBuilder
             .speak(attrs.t('HELP_MESSAGE'))
             .getResponse();
@@ -36,6 +38,7 @@ module.exports.ExitHandler = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("ExitHandler started");
         return handlerInput.responseBuilder
             .speak(attrs.t('STOP_MESSAGE'))
             .getResponse();

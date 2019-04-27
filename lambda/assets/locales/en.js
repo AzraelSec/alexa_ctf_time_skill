@@ -1,9 +1,8 @@
-
 'use strict'
 module.exports = {
     translation: {
         SKILL_NAME: 'c. t. f. time',
-        HELLO_MESSAGE: '<emphasis>c. t. f. time</emphasis> is ready',
+        HELLO_MESSAGE: 'Welcome to Sfide C. T. F. ! Ask me information about upcoming cybersecurity challanges or about teams rankings',
         HELP_MESSAGE: 'You can ask me information about c. t. f. time\'s rankings, about the upcoming events, and more',
         HELP_REPROMPT: 'What can I help you with?',
         ERROR_MESSAGE: 'I cannot load information at the moment, retry later',

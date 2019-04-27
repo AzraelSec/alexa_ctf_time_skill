@@ -12,6 +12,7 @@ module.exports.GetNextEvent = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("GetNextEvent started");
         return new Promise((resolve) => {
             getNextEvent(attrs)
             .then((event) => resolve(handlerInput.responseBuilder.speak(event).getResponse()))
@@ -43,6 +44,7 @@ module.exports.GetNextEvents = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("GetNextEvents started");
         const number = handlerInput.requestEnvelope.request.intent.slots.number.value || 5;
         //insert a startByDate slot to look for events from a specific date
         const date = new Date();

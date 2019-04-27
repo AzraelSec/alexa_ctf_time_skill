@@ -2,7 +2,7 @@
 module.exports = {
     translation: {
         SKILL_NAME: 'sfide c. t. f.',
-        HELLO_MESSAGE: '<emphasis>sfide c. t. f.</emphasis> è pronto',
+        HELLO_MESSAGE: 'Benvenuto in Sfide C. T. F. ! Chiedimi informazioni relative alle prossime sfide di sicurezza informatica o alle classifiche delle squadre',
         HELP_MESSAGE: 'Puoi chiedermi informazioni sulle classifiche su sfide c. t. f. , quali siano i prossimi eventi, e altro',
         HELP_REPROMPT: 'In cosa posso aiutarti?',
         ERROR_MESSAGE: 'Al momento non riesco a cercare le informazioni, riprova più tardi',

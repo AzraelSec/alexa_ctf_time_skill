@@ -13,6 +13,7 @@ module.exports.GetTopTeamsHandler = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("GetTopTeamsHandler started");
         let slots = handlerInput.requestEnvelope.request.intent.slots;
         let year = (slots.year.value && slots.year.value !== '?' ? slots.year.value : null) || (new Date().getFullYear());
         let number =  slots.number.value || 10;
@@ -52,6 +53,7 @@ module.exports.GetTopTeamHandler = {
     },
     handle(handlerInput) {
         const attrs = handlerInput.attributesManager.getRequestAttributes();
+        console.log("GetTopTeamHandler started");
         let slots = handlerInput.requestEnvelope.request.intent.slots;
         let year = (slots.year.value && slots.year.value !== '?' ? slots.year.value : null) || (new Date().getFullYear());
         return new Promise((resolve) => {
