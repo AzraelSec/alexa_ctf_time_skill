@@ -14,6 +14,7 @@
 
 ## About
 This skill implements a bridge between [C.T.F. Time](https://ctftime.org/)'s API and Amazon's Alexa assistant.
+You can find this skill on the Amazon Alexa Skill Store; try it: [<<Activate>>](https://alexa.amazon.it/spa/index.html#skills/dp/B07R97KY12).
 
 ## Supported Commands
 This is only the first release, so there are only few commands **_(IT/EN supported)_**:
