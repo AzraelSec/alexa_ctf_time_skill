@@ -10,6 +10,7 @@ module.exports.LaunchHandler = {
         console.log("LaunchHandler started");
         return handlerInput.responseBuilder
         .speak(attrs.t('HELLO_MESSAGE'))
+        .reprompt(attrs.t('HELP_MESSAGE'))
         .getResponse();
     }
 };
@@ -25,6 +26,7 @@ module.exports.HelpHandler = {
         console.log("HelpHandler started");
         return handlerInput.responseBuilder
             .speak(attrs.t('HELP_MESSAGE'))
+            .reprompt(attrs.t('HELP_REPROMPT'))
             .getResponse();
     }
 };

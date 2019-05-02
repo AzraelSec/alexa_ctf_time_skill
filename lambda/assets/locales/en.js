@@ -2,8 +2,8 @@
 module.exports = {
     translation: {
         SKILL_NAME: 'c. t. f. time',
-        HELLO_MESSAGE: 'Welcome to Sfide C. T. F. ! Ask me information about upcoming cybersecurity challanges or about teams rankings',
-        HELP_MESSAGE: 'You can ask me information about c. t. f. time\'s rankings, about the upcoming events, and more',
+        HELLO_MESSAGE: 'Welcome to Sfide C. T. F. ! Ask me information about upcoming cybersecurity challanges or about teams rankings! What do you need?',
+        HELP_MESSAGE: 'You can ask me information about c. t. f. time\'s rankings, about the upcoming events, and more. What can I help you with?',
         HELP_REPROMPT: 'What can I help you with?',
         ERROR_MESSAGE: 'I cannot load information at the moment, retry later',
         ERROR_REQUEST_MESSAGE : 'I am sorry, I am not sure I understood. Try to rephrase your question!',
